@@ -1,4 +1,4 @@
-﻿@model IEnumerable<InfnetMovieDataBase.Domain.Filme>
+﻿@model IEnumerable<InfnetMovieDataBase.Domain.Pessoa>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,13 +16,13 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Titulo)
+                @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TituloOriginal)
+                @Html.DisplayNameFor(model => model.Sobrenome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ano)
+                @Html.DisplayNameFor(model => model.DataNascimento)
             </th>
             <th></th>
         </tr>
@@ -34,16 +34,16 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Titulo)
+                @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TituloOriginal)
+                @Html.DisplayFor(modelItem => item.Sobrenome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Ano)
+                @Html.DisplayFor(modelItem => item.DataNascimento)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
