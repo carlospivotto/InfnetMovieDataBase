@@ -95,9 +95,17 @@ namespace InfnetMovieDataBase.Repository
         public void CriarFilme(Filme filme)
         {
             using var connection = new SqlConnection(connectionString);
-            var cmdText = "INSERT INTO Filme (Titulo, TituloOriginal, Ano) VALUES (@Titulo, @TituloOriginal, @Ano)";
+
+            //Usando puramente ADO.NET:
+            /*var cmdText = "INSERT INTO Filme (Titulo, TituloOriginal, Ano) VALUES (@Titulo, @TituloOriginal, @Ano)";
             var insert = new SqlCommand(cmdText, connection);
-            insert.CommandType = CommandType.Text;
+            insert.CommandType = CommandType.Text;*/
+
+            //Usando Stored Procedure:
+            var sp = "CriarFilme";
+            var insert = new SqlCommand(sp, connection);
+            insert.CommandType = CommandType.StoredProcedure;
+            
             //Configurar os parâmetros @Titulo, @TituloOriginal e @Ano:
             insert.Parameters.AddWithValue("@Titulo", filme.Titulo);
             insert.Parameters.AddWithValue("@TituloOriginal", filme.TituloOriginal);
