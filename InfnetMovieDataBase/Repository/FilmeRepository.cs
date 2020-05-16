@@ -52,6 +52,45 @@ namespace InfnetMovieDataBase.Repository
             return filmes;
         }
 
+        //Listar elenco do filme
+        public IEnumerable<Pessoa> ListarElenco(int id)
+        {
+            var elenco = new List<Pessoa>();
+
+            using var connection = new SqlConnection(connectionString);
+            var sp = "ListarAtoresPorFilme";
+            //Vinculando o que desejamos executar (a stored procedure)
+            //à conexão na qual desejamos executá-la (connection)
+            var sqlCommand = new SqlCommand(sp, connection);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.AddWithValue("@FilmeId", id);
+
+            try
+            {
+                connection.Open();
+                using var reader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
+                while (reader.Read())
+                {
+                    var pessoa = new Pessoa
+                    {
+                        Nome = reader["Nome"].ToString(),
+                        Sobrenome = reader["Sobrenome"].ToString()
+                    };
+
+                    elenco.Add(pessoa);
+                }
+            } catch (Exception e)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return elenco;
+        }
+
         //Criar filmes
         public void CriarFilme(Filme filme)
         {
